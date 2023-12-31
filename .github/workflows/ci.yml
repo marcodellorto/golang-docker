@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  build:
+    uses: marcodellorto/golang-docker/.github/workflows/build.yml@main
+    secrets: inherit
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "1.21.5-bookworm"
+            imageTags: |
+              type=raw,value=1.21.5-bookworm
+              type=raw,value=1.21-bookworm
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: base
+            buildArgs: |
+              fromImage=golang:1.21.5-bookworm
+          - name: "1.21.5-bookworm-sam"
+            imageTags: |
+              type=raw,value=1.21.5-bookworm-sam
+              type=raw,value=1.21-bookworm-sam
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: sam
+            buildArgs: |
+              fromImage=golang:1.21.5-bookworm
+          - name: "1.21.5-bookworm-dev"
+            imageTags: |
+              type=raw,value=1.21.5-bookworm-dev
+              type=raw,value=1.21-bookworm-dev
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: dev
+            buildArgs: |
+              fromImage=golang:1.21.5-bookworm
+    with:
+      imageRegistry: marcodellorto/golang
+      imageTags: ${{ matrix.imageTags }}
+      dockerfilePath: ${{ matrix.dockerfilePath }}
+      buildTarget: ${{ matrix.buildTarget }}
+      buildArgs: ${{ matrix.buildArgs }}
