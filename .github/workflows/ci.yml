@@ -11,6 +11,7 @@ jobs:
   build:
     uses: marcodellorto/golang-docker/.github/workflows/build.yml@main
     secrets: inherit
+    name: ${{ matrix.name }}
     strategy:
       fail-fast: false
       matrix:
