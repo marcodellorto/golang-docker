@@ -41,6 +41,7 @@ jobs:
             buildArgs: |
               fromImage=golang:1.21.5-bookworm
     with:
+      name: ${{ matrix.name }}
       imageRegistry: marcodellorto/golang
       imageTags: ${{ matrix.imageTags }}
       dockerfilePath: ${{ matrix.dockerfilePath }}
