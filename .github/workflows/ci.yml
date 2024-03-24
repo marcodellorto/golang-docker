@@ -16,10 +16,54 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - name: "1.21.8-bookworm"
+            imageTags: |
+              type=raw,value=1.21.8-bookworm
+              type=raw,value=1.21-bookworm
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: base
+            buildArgs: |
+              fromImage=golang:1.21.8-bookworm
+          - name: "1.21.8-bookworm-sam"
+            imageTags: |
+              type=raw,value=1.21.8-bookworm-sam
+              type=raw,value=1.21-bookworm-sam
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: sam
+            buildArgs: |
+              fromImage=golang:1.21.8-bookworm
+          - name: "1.21.8-bookworm-dev"
+            imageTags: |
+              type=raw,value=1.21.8-bookworm-dev
+              type=raw,value=1.21-bookworm-dev
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: dev
+            buildArgs: |
+              fromImage=golang:1.21.8-bookworm
+          - name: "1.21.7-bookworm"
+            imageTags: |
+              type=raw,value=1.21.7-bookworm
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: base
+            buildArgs: |
+              fromImage=golang:1.21.7-bookworm
+          - name: "1.21.7-bookworm-sam"
+            imageTags: |
+              type=raw,value=1.21.7-bookworm-sam
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: sam
+            buildArgs: |
+              fromImage=golang:1.21.7-bookworm
+          - name: "1.21.7-bookworm-dev"
+            imageTags: |
+              type=raw,value=1.21.7-bookworm-dev
+            dockerfilePath: ./1.21/bookworm/Dockerfile
+            buildTarget: dev
+            buildArgs: |
+              fromImage=golang:1.21.7-bookworm
           - name: "1.21.6-bookworm"
             imageTags: |
               type=raw,value=1.21.6-bookworm
-              type=raw,value=1.21-bookworm
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: base
             buildArgs: |
@@ -27,7 +71,6 @@ jobs:
           - name: "1.21.6-bookworm-sam"
             imageTags: |
               type=raw,value=1.21.6-bookworm-sam
-              type=raw,value=1.21-bookworm-sam
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: sam
             buildArgs: |
@@ -35,7 +78,6 @@ jobs:
           - name: "1.21.6-bookworm-dev"
             imageTags: |
               type=raw,value=1.21.6-bookworm-dev
-              type=raw,value=1.21-bookworm-dev
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: dev
             buildArgs: |
