@@ -16,93 +16,54 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: "1.21.8-bookworm"
+          - name: "1.22.5-bookworm"
             imageTags: |
-              type=raw,value=1.21.8-bookworm
+              type=raw,value=1.22.5-bookworm
+              type=raw,value=1.22-bookworm
+            dockerfilePath: ./1.22/bookworm/Dockerfile
+            buildTarget: base
+            buildArgs: |
+              fromImage=golang:1.22.5-bookworm
+          - name: "1.22.5-bookworm-sam"
+            imageTags: |
+              type=raw,value=1.22.5-bookworm-sam
+              type=raw,value=1.22-bookworm-sam
+            dockerfilePath: ./1.22/bookworm/Dockerfile
+            buildTarget: sam
+            buildArgs: |
+              fromImage=golang:1.22.5-bookworm
+          - name: "1.22.5-bookworm-dev"
+            imageTags: |
+              type=raw,value=1.22.5-bookworm-dev
+              type=raw,value=1.22-bookworm-dev
+            dockerfilePath: ./1.22/bookworm/Dockerfile
+            buildTarget: dev
+            buildArgs: |
+              fromImage=golang:1.22.5-bookworm
+          - name: "1.21.12-bookworm"
+            imageTags: |
+              type=raw,value=1.21.12-bookworm
               type=raw,value=1.21-bookworm
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: base
             buildArgs: |
-              fromImage=golang:1.21.8-bookworm
-          - name: "1.21.8-bookworm-sam"
+              fromImage=golang:1.21.12-bookworm
+          - name: "1.21.12-bookworm-sam"
             imageTags: |
-              type=raw,value=1.21.8-bookworm-sam
+              type=raw,value=1.21.12-bookworm-sam
               type=raw,value=1.21-bookworm-sam
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: sam
             buildArgs: |
-              fromImage=golang:1.21.8-bookworm
-          - name: "1.21.8-bookworm-dev"
+              fromImage=golang:1.21.12-bookworm
+          - name: "1.21.12-bookworm-dev"
             imageTags: |
-              type=raw,value=1.21.8-bookworm-dev
+              type=raw,value=1.21.12-bookworm-dev
               type=raw,value=1.21-bookworm-dev
             dockerfilePath: ./1.21/bookworm/Dockerfile
             buildTarget: dev
             buildArgs: |
-              fromImage=golang:1.21.8-bookworm
-          - name: "1.21.7-bookworm"
-            imageTags: |
-              type=raw,value=1.21.7-bookworm
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: base
-            buildArgs: |
-              fromImage=golang:1.21.7-bookworm
-          - name: "1.21.7-bookworm-sam"
-            imageTags: |
-              type=raw,value=1.21.7-bookworm-sam
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: sam
-            buildArgs: |
-              fromImage=golang:1.21.7-bookworm
-          - name: "1.21.7-bookworm-dev"
-            imageTags: |
-              type=raw,value=1.21.7-bookworm-dev
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: dev
-            buildArgs: |
-              fromImage=golang:1.21.7-bookworm
-          - name: "1.21.6-bookworm"
-            imageTags: |
-              type=raw,value=1.21.6-bookworm
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: base
-            buildArgs: |
-              fromImage=golang:1.21.6-bookworm
-          - name: "1.21.6-bookworm-sam"
-            imageTags: |
-              type=raw,value=1.21.6-bookworm-sam
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: sam
-            buildArgs: |
-              fromImage=golang:1.21.6-bookworm
-          - name: "1.21.6-bookworm-dev"
-            imageTags: |
-              type=raw,value=1.21.6-bookworm-dev
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: dev
-            buildArgs: |
-              fromImage=golang:1.21.6-bookworm
-          - name: "1.21.5-bookworm"
-            imageTags: |
-              type=raw,value=1.21.5-bookworm
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: base
-            buildArgs: |
-              fromImage=golang:1.21.5-bookworm
-          - name: "1.21.5-bookworm-sam"
-            imageTags: |
-              type=raw,value=1.21.5-bookworm-sam
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: sam
-            buildArgs: |
-              fromImage=golang:1.21.5-bookworm
-          - name: "1.21.5-bookworm-dev"
-            imageTags: |
-              type=raw,value=1.21.5-bookworm-dev
-            dockerfilePath: ./1.21/bookworm/Dockerfile
-            buildTarget: dev
-            buildArgs: |
-              fromImage=golang:1.21.5-bookworm
+              fromImage=golang:1.21.12-bookworm
     with:
       name: ${{ matrix.name }}
       imageRegistry: marcodellorto/golang
