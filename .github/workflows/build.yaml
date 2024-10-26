@@ -71,12 +71,13 @@ jobs:
           mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
+      - name: Set sanitized platform
+        run: echo "SANITIZED_PLATFORM=${{ matrix.platform }}" | sed 's/\//-/g' >> $GITHUB_ENV
       - name: Upload digest
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ inputs.name }}
+          name: digests-${{ inputs.name }}-${{ env.SANITIZED_PLATFORM }}
           path: /tmp/digests/*
-          if-no-files-found: error
           retention-days: 1
 
   merge:
@@ -84,10 +85,15 @@ jobs:
     needs:
       - build
     steps:
-      - name: Download digests
-        uses: actions/download-artifact@v3
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
         with:
           name: digests-${{ inputs.name }}
+          pattern: digests-${{ inputs.name }}-*
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          pattern: digests-${{ inputs.name }}
           path: /tmp/digests
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -103,10 +109,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Create manifest list and push
-        working-directory: /tmp/digests
+        working-directory: /tmp/digests/digests-${{ inputs.name }}
         run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ inputs.imageRegistry }}@sha256:%s ' *)
+          docker buildx imagetools create \
+          $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+          $(printf '${{ inputs.imageRegistry }}@sha256:%s ' *)
       - name: Inspect image
         run: |
           docker buildx imagetools inspect ${{ inputs.imageRegistry }}:${{ steps.meta.outputs.version }}

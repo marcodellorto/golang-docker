@@ -1,4 +1,4 @@
-ARG fromImage=golang:1.23-bookworm
+ARG fromImage
 
 FROM golangci/golangci-lint:latest-alpine AS golangci
 FROM amazon/aws-cli:latest AS aws
@@ -47,4 +47,5 @@ RUN GO111MODULE=on go install -v golang.org/x/tools/gopls@latest \
     ; GO111MODULE=on go install -v github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
     ; GO111MODULE=on go install -v github.com/ramya-rao-a/go-outline@latest \
     ; GO111MODULE=on go install -v github.com/go-delve/delve/cmd/dlv@latest \
-    ; GO111MODULE=on go install -v golang.org/x/lint/golint@latest
+    ; GO111MODULE=on go install -v golang.org/x/lint/golint@latest \
+;
