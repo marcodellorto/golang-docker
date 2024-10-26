@@ -1,6 +1,6 @@
 # https://hub.docker.com/r/marcodellorto/golang
 
-[![Github Actions CI](https://github.com/marcodellorto/golang-docker/actions/workflows/ci.yml/badge.svg)](https://github.com/marcodellorto/golang-docker/actions/workflows/ci.yml)
+[![Github Actions CI](https://github.com/marcodellorto/golang-docker/actions/workflows/ci.yaml/badge.svg)](https://github.com/marcodellorto/golang-docker/actions/workflows/ci.yaml)
 [![Docker Pulls](https://badgen.net/docker/pulls/marcodellorto/golang?icon=docker&label=Pulls)](https://hub.docker.com/r/marcodellorto/golang)
 
 ## Description
