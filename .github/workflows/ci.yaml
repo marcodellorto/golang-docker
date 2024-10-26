@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  yamllint:
+    name: 'Github Actions Yamllint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Yamllint'
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: '.github/workflows'
+          yamllint_config_filepath: './.yamllint.yml'
+          yamllint_strict: false
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    needs:
+      - yamllint
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        golangVersion:
+          - 1.23
+          - 1.22
+          - 1.21
+        imageBase:
+          - bookworm
+        target:
+          - base
+          - sam
+          - dev
+    with:
+      name: ${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
+      imageRegistry: marcodellorto/golang
+      imageTags: |
+        type=raw,value=${{ matrix.golangVersion }}-${{ matrix.imageBase }}
+      dockerfilePath: ${{ matrix.imageBase }}/Dockerfile
+      buildTarget: ${{ matrix.target }}
+      buildArgs: |
+        fromImage=golang:${{ matrix.golangVersion }}-${{ matrix.imageBase }}

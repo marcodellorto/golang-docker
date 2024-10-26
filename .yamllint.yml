@@ -1,0 +1,34 @@
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    allow-non-breakable-words: true
+    ignore: |
+      https?://
+
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: true
+
+  document-start: disable
+
+  empty-lines:
+    max: 2
+
+  trailing-spaces:
+    level: error
+
+  new-line-at-end-of-file: enable
+
+  key-duplicates: enable
+  key-ordering: disable
+  brackets: disable
+
+  truthy: disable
+
+  document-end: disable
+
+  comments:
+    min-spaces-from-content: 1
