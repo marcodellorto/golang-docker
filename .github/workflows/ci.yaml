@@ -50,7 +50,7 @@ jobs:
       name: ${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
       imageRegistry: marcodellorto/golang
       imageTags: |
-        type=raw,value=${{ matrix.golangVersion }}-${{ matrix.imageBase }}
+        type=raw,value=${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
       dockerfilePath: ${{ matrix.imageBase }}/Dockerfile
       buildTarget: ${{ matrix.target }}
       buildArgs: |
