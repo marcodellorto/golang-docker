@@ -49,3 +49,11 @@ RUN GO111MODULE=on go install -v golang.org/x/tools/gopls@latest \
     ; GO111MODULE=on go install -v github.com/go-delve/delve/cmd/dlv@latest \
     ; GO111MODULE=on go install -v golang.org/x/lint/golint@latest \
 ;
+
+FROM dev AS claude
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    ; apt-get install -y nodejs \
+    ; npm install -g @anthropic-ai/claude-code \
+    ; rm -rf /var/lib/apt/lists/* \
+;
