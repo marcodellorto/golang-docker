@@ -48,6 +48,7 @@ jobs:
           - sam
           - dev
           - claude
+          - codex
     with:
       name: ${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
       imageRegistry: marcodellorto/golang

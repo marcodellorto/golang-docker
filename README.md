@@ -11,10 +11,16 @@ Contained within this repository are Docker images equipped with:
 - **Go Programming Environment:** Pre-installed Go language tools and dependencies for efficient development.
 - **VSCode Devcontainer Setup:** Configured settings and dependencies to facilitate integration with Visual Studio Code's devcontainer feature.
 - **Additional Utilities:** Optional add-ons or tools that enhance the development workflow for Go projects.
+- **AI Coding Assistants:** Dedicated `claude` and `codex` image targets with the corresponding command-line tools pre-installed.
 
 ## Usage Instructions
 
 You can utilize these Docker images for your VSCode devcontainer setup, [here](https://github.com/marcodellorto/golang-devcontainer) you can find a skeleton of an already configured project that uses these images.
+
+Assistant-specific images follow these tag patterns:
+
+- `marcodellorto/golang:<go-version>-bookworm-claude`
+- `marcodellorto/golang:<go-version>-bookworm-codex`
 
 ## Additional Information
 
