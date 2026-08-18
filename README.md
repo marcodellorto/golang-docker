@@ -6,6 +6,16 @@
 ## Description
 The `marcodellorto/golang` repository hosts Docker images tailored for seamless local development environments using VSCode's devcontainer feature. Each image is preconfigured with the essential components required for Go programming, ensuring a hassle-free setup process for developers. These images are also suitable for integration into CI/CD pipelines.
 
+## Supported Go Versions
+
+Images are built for the latest three supported Go versions:
+
+- Go 1.26
+- Go 1.25
+- Go 1.24
+
+Go 1.23 and earlier are no longer built or maintained by this repository.
+
 ## Contents
 Contained within this repository are Docker images equipped with:
 - **Go Programming Environment:** Pre-installed Go language tools and dependencies for efficient development.
