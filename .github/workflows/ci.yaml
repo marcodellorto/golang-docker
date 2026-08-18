@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - chore/migrate-to-ghcr
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'
