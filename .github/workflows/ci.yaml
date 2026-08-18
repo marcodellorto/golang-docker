@@ -30,6 +30,9 @@ jobs:
   build:
     needs:
       - yamllint
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/build.yaml
     secrets: inherit
     name: ${{ matrix.name }}
@@ -50,7 +53,7 @@ jobs:
           - codex
     with:
       name: ${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
-      imageRegistry: marcodellorto/golang
+      imageRegistry: ghcr.io/marcodellorto/golang
       imageTags: |
         type=raw,value=${{ matrix.golangVersion }}-${{ matrix.imageBase }}-${{ matrix.target }}
       dockerfilePath: ${{ matrix.imageBase }}/Dockerfile
