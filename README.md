@@ -9,8 +9,9 @@ The `ghcr.io/marcodellorto/golang` package hosts Docker images tailored for seam
 
 ## Supported Go Versions
 
-Images are built for the latest three supported Go versions:
+Images are built for the latest four supported Go versions:
 
+- Go 1.27
 - Go 1.26
 - Go 1.25
 - Go 1.24
@@ -33,7 +34,7 @@ You can utilize these Docker images for your VSCode devcontainer setup, [here](h
 The images are public and can be pulled from GitHub Container Registry without authentication:
 
 ```shell
-docker pull ghcr.io/marcodellorto/golang:1.26-bookworm-dev
+docker pull ghcr.io/marcodellorto/golang:1.27-bookworm-dev
 ```
 
 Tags follow this pattern:
