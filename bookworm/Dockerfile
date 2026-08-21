@@ -1,4 +1,4 @@
-ARG fromImage
+ARG fromImage=golang:bookworm
 
 FROM golangci/golangci-lint:latest-alpine AS golangci
 FROM amazon/aws-cli:latest AS aws
