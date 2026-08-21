@@ -23,7 +23,7 @@ FROM base AS sam
 ENV SAM_CLI_TELEMETRY=0
 
 COPY --from=docker /usr/local/bin/docker /usr/local/bin/docker
-COPY --from=docker /usr/local/bin/docker-compose /usr/local/bin/docker-compose
+COPY --from=docker /usr/local/libexec/docker/cli-plugins/ /usr/local/libexec/docker/cli-plugins/
 COPY --from=aws /usr/local/aws-cli /usr/local/aws-cli
 
 RUN ln -s /usr/local/aws-cli/v2/current/bin/aws /usr/local/bin/aws \
@@ -60,8 +60,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 
 FROM dev AS codex
 
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    ; apt-get install -y nodejs \
+RUN apt-get update \
+    ; curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    ; apt-get install -y \
+        nodejs \
+        bubblewrap \
     ; npm install -g @openai/codex \
     ; rm -rf /var/lib/apt/lists/* \
 ;
